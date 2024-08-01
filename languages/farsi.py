@@ -28,5 +28,5 @@ if __name__ == "__main__":
     obj = Fa('900x500', 
                 'DevHelper Farsi py',
                 '#508D4E',
-                r'D:\SAMAN\projects-soon\python-projects\git-hub\DevHelper-py\images\assistant-icon.ico')
+                r'images-lang\assistant-icon.ico')
     obj.mainloop()
