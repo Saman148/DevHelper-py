@@ -87,9 +87,10 @@ class Main(Tk):
             f.write(lang_value)
 
         if lang_value == 'fa': #farsi language
+                self.destroy()
                 obj = Fa('900x500', 
                 'DevHelper Farsi py',
-                '#508D4E',
+                '#36C2CE',
                 r'images-main/assistant-icon.ico',)
                 obj.create_lables_buttons_frame()
                 obj.mainloop()
