@@ -8,7 +8,7 @@ from tkinter import (Button,
                      BooleanVar,
                      PhotoImage,
                      messagebox)
-#from farsi import Fa
+from languages.farsi import Fa
 import webbrowser
 
 class Main(Tk):
@@ -87,7 +87,12 @@ class Main(Tk):
             f.write(lang_value)
 
         if lang_value == 'fa': #farsi language
-                pass
+                self.destroy()
+                obj = Fa('900x500', 
+                'DevHelper Farsi py',
+                '#508D4E',
+                r'DevHelper-py\images\assistant-icon.ico')
+                obj.mainloop()
 
         if lang_value == 'en': #english language
             messagebox.showinfo('language', 'English comming soon')    #open english file
