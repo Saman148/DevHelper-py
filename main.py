@@ -39,14 +39,14 @@ class Main(Tk):
         v = StringVar(self, "fa") 
 
         for (text, value) in values.items(): 
-            Radiobutton(self, text = text, variable = v, bg='#36C2CE', fg='black', activebackground='#4535C1',font=('arial', 12, 'bold'),
+            Radiobutton(self, text = text, variable = v, bg='#36C2CE', fg='black', activebackground='darkgreen',font=('arial', 12, 'bold'),
                 value = value).pack(side = TOP, ipady = 5) 
 
         # buttons
         b_submit = Button(self,
                         text="Submit",
                         font=('arial', 12, 'bold'),
-                        activebackground='#4535C1',
+                        activebackground='#478CCF',
                         activeforeground='white',
                         fg='black',
                         bg='#77E4C8',
@@ -57,7 +57,7 @@ class Main(Tk):
         b_github = Button(self,
                         text=" Give me ⭐",
                         font=('arial', 12, 'bold'),
-                        activebackground='#4535C1',
+                        activebackground='#478CCF',
                         activeforeground='white',
                         fg='black',
                         cursor='star',
@@ -69,7 +69,7 @@ class Main(Tk):
 
         v1 = BooleanVar(value=False) 
 
-        Radiobutton(self, text = "Don't show me again", variable = v1, bg='#36C2CE', fg='black', activebackground='#4535C1',font=('arial', 12, 'bold'),
+        Radiobutton(self, text = "Don't show me again", variable = v1, bg='#36C2CE', fg='black', activebackground='darkgreen',font=('arial', 12, 'bold'),
                 value = True, command=lambda:self.dont_show(v1)).place(x=30, y=250)
 
     def link_github(self):
@@ -83,15 +83,15 @@ class Main(Tk):
             
     def select_lang(self, lang, a):
         lang_value = lang.get()
-        with open(r'txt\lang.txt', 'w') as f:
+        with open(r'txt/lang.txt', 'w') as f:
             f.write(lang_value)
 
         if lang_value == 'fa': #farsi language
-                self.destroy()
                 obj = Fa('900x500', 
                 'DevHelper Farsi py',
                 '#508D4E',
-                r'images-main\assistant-icon.ico')
+                r'images-main/assistant-icon.ico',)
+                obj.create_lables_buttons_frame()
                 obj.mainloop()
 
         if lang_value == 'en': #english language
@@ -99,9 +99,9 @@ class Main(Tk):
 
 if __name__ == "__main__":
     
-    with open(r'txt\show.txt', 'r') as f:
+    with open(r'txt/show.txt', 'r') as f:
         show = f.read()
-    with open(r'txt\lang.txt', 'r') as f:
+    with open(r'txt/lang.txt', 'r') as f:
         lang = f.read()
 
     if show == 'True':
@@ -114,6 +114,6 @@ if __name__ == "__main__":
         obj1 = Main('500x300',
                     "DevHelper py",
                     '#36C2CE',
-                    "images-main/assistant-icon.ico")
+                    "images-main/assistant-icon.ico",)
         obj1.create_lables_buttons_radios()
         obj1.mainloop()
