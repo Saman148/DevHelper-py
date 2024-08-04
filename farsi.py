@@ -136,17 +136,26 @@ class Fa(Tk):
                 messagebox.showerror('خطا', 'اطلاعات وارد شده اشتباه هست')
 
         def create_venv():
+            
             try:
                 nameVenv = enName.get()
                 os.system(f'py -m venv {nameVenv}')
                 messagebox.showinfo('ماشین مجازی', 'ماشین مجازی با موفقیت ساخته شد')
                 
-
+                btActiveVenv['state'] = 'active'
                 
             except Exception as e:
                 messagebox.showerror('خطا', e)
 
         
+        def active_venv():
+            command = 'dir'
+            main_path = enGetPath.get()
+            nameVenv = enName.get()
+            path = os.path.join(main_path, nameVenv, 'Scripts')
+            os.chdir(path)
+            command = 'activate.bat'
+            os.system(f"start cmd /k {command}")
 
 
         self.clear(frame)
@@ -192,6 +201,21 @@ class Fa(Tk):
                               command=create_venv,
                               )
         btCreateVenv.place(x=80, y=187)
+
+        btActiveVenv = Button(frame,
+                              text='فعال کردن',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              state='disabled',
+                              command=active_venv
+                              )
+        btActiveVenv.place(x=300, y=300)
+
+      
+
         
 
     def command_git(self, frame):
