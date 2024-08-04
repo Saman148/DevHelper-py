@@ -8,7 +8,7 @@ from tkinter import (Button,
                      BooleanVar,
                      PhotoImage,
                      messagebox)
-from languages.farsi import Fa
+from farsi import Fa
 import webbrowser
 
 class Main(Tk):
