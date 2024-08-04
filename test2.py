@@ -1,14 +1,4 @@
-from tkinter import *
+import os
 
-
-root = Tk()
-b1 = Button(text='ok1', state='active')
-b1.pack()
-
-b2 = Button(text='ok2')
-b2.pack()
-
-
-
-
-root.mainloop()
+command = 'dir'
+os.system(f"start cmd /k {command}")

@@ -195,8 +195,14 @@ class Fa(Tk):
         
 
     def command_git(self, frame):
-        def create_git():
-            pass
+        def get_path_git():
+            try:
+                file = filedialog.askdirectory()
+                os.chdir(file)
+                enGetPath.delete(0, END)
+                enGetPath.insert(0,file)
+            except:
+                messagebox.showerror('خطا', 'اطلاعات وارد شده اشتباه هست')
 
         self.clear(frame)
 
@@ -209,7 +215,7 @@ class Fa(Tk):
 
         btGetPath = Button(frame,
                            image=self.photoFolder,
-                           command=create_git)
+                           command=get_path_git)
         btGetPath.place(x=575, y= 80)
 
         enGetPath = Entry(frame,
