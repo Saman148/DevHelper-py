@@ -13,6 +13,7 @@ class Fa(Tk):
         self.photo = PhotoImage(file = r"images-main\github64.png")
         self.photo1 = PhotoImage(file = r"images-main\hand.png")
         self.photo2 = PhotoImage(file = r"images-main\3_people.png")
+        self.photoFolder = PhotoImage(file=r'images-main\folder_64.png')
 
         
 
@@ -121,6 +122,94 @@ class Fa(Tk):
     
     def command_venv(self, frame):
         self.clear(frame)
+
+        lbVenv = Label(frame,
+                       text='ماشین مجازی (venv)',
+                       font=('arial', 18, 'bold'),
+                       )
+        lbVenv.place(x=255, y= 10)
+
+
+        btGetPath = Button(frame,
+                           image=self.photoFolder)
+        btGetPath.place(x=575, y= 80)
+
+        enGetPath = Entry(frame,
+                       width=40,
+                       font=('arial', 18, 'bold'),
+                       bg='#77E4C8')
+        enGetPath.place(x=10, y=100)
+
+        lbVenvName = Label(frame,
+                       text=': اسم ماشین مجازی',
+                       font=('arial', 18, 'bold'),
+                       )
+        lbVenvName.place(x=505, y= 180)
+
+        enName = Entry(frame,
+                       width=20,
+                       font=('arial', 18, 'bold'),
+                       justify='center',
+                       bg='#77E4C8')
+        enName.place(x=195, y=186)
+
+        btCreateVenv = Button(frame,
+                              text=' ساختن',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              )
+        btCreateVenv.place(x=80, y=187)
+
+        btActiveVenv = Button(frame,
+                              text='فعال کردن',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              state='disabled'
+                              )
+        btActiveVenv.place(x=400, y=300)
+
+        btDeActiveVenv = Button(frame,
+                              text='غیر فعال کردن',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              state='disabled'
+                              )
+        btDeActiveVenv.place(x=200, y=300)
+
+        lbPipName = Label(frame,
+                       text='pip install',
+                       font=('arial', 18, 'bold'),
+                       )
+        lbPipName.place(x=200, y= 400)
+
+        enGetLib = Entry(frame,
+                       width=10,
+                       font=('arial', 18, 'bold'),
+                       justify='center',
+                       bg='#77E4C8',
+                       state='disabled')
+        enGetLib.place(x=355, y=400)
+
+        btActiveVenv = Button(frame,
+                              text='نصب کن',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              state='disabled'
+                              )
+        btActiveVenv.place(x=540, y=400)
+        
 
     def command_git(self, frame):
         self.clear(frame)

@@ -16,7 +16,7 @@ def open_file():
         if os.name == 'nt':  # If the OS is Windows
             os.system('dir')
         else:  # For Linux and macOS
-            os.system('ls')
+            os.system('ls') 
 
 # Add a Label widget
 label = Label(win, text="Click the Button to browse the Files", font=('Georgia 13'))
