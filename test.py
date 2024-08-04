@@ -1,32 +1,28 @@
-import tkinter as tk
+from tkinter import *
+from tkinter import ttk, filedialog
+import os
 
-class App(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        
-        self.title("RadioButton Toggle Example")
-        self.geometry("300x200")
-        
-        # متغیر برای کنترل وضعیت RadioButton
-        self.radio_var = tk.StringVar(value="off")  # مقدار پیش‌فرض "off"
-        
-        # ایجاد RadioButton
-        self.radio = tk.Radiobutton(self, text="Option 1", variable=self.radio_var, value="on")
-        self.radio.pack(pady=10)
-        
-        # دکمه برای خاموش و روشن کردن RadioButton
-        self.toggle_button = tk.Button(self, text="Toggle RadioButton", command=self.toggle_radiobutton)
-        self.toggle_button.pack(pady=10)
-        
-    def toggle_radiobutton(self):
-        # بررسی وضعیت RadioButton و خاموش یا روشن کردن آن
-        if self.radio['state'] == 'normal':
-            self.radio.config(state='disabled')  # غیرفعال کردن RadioButton
-            self.radio_var.set("off")  # تنظیم متغیر به "off"
-        else:
-            self.radio.config(state='normal')  # فعال کردن RadioButton
-            self.radio_var.set("on")  # تنظیم متغیر به "on"
+# Create an instance of tkinter frame
+win = Tk()
 
-if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+# Set the geometry of tkinter frame
+win.geometry("700x350")
+
+def open_file():
+    file = filedialog.askdirectory()
+    if file:
+        os.chdir(file)
+        # Use os.system to list files in the current directory
+        if os.name == 'nt':  # If the OS is Windows
+            os.system('dir')
+        else:  # For Linux and macOS
+            os.system('ls')
+
+# Add a Label widget
+label = Label(win, text="Click the Button to browse the Files", font=('Georgia 13'))
+label.pack(pady=10)
+
+# Create a Button
+ttk.Button(win, text="Browse", command=open_file).pack(pady=20)
+
+win.mainloop()
