@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog
+import os
+import subprocess
 import webbrowser
 
 class Fa(Tk):
@@ -120,7 +123,32 @@ class Fa(Tk):
             for i in frame.winfo_children() :
                 i.destroy()
     
+
     def command_venv(self, frame):
+
+        def get_path():
+            try:
+                file = filedialog.askdirectory()
+                os.chdir(file)
+                enGetPath.delete(0, END)
+                enGetPath.insert(0,file)
+            except:
+                messagebox.showerror('خطا', 'اطلاعات وارد شده اشتباه هست')
+
+        def create_venv():
+            try:
+                nameVenv = enName.get()
+                os.system(f'py -m venv {nameVenv}')
+                messagebox.showinfo('ماشین مجازی', 'ماشین مجازی با موفقیت ساخته شد')
+                
+
+                
+            except Exception as e:
+                messagebox.showerror('خطا', e)
+
+        
+
+
         self.clear(frame)
 
         lbVenv = Label(frame,
@@ -131,7 +159,8 @@ class Fa(Tk):
 
 
         btGetPath = Button(frame,
-                           image=self.photoFolder)
+                           image=self.photoFolder,
+                           command=get_path)
         btGetPath.place(x=575, y= 80)
 
         enGetPath = Entry(frame,
@@ -160,59 +189,34 @@ class Fa(Tk):
                               activeforeground='white',
                               fg='black',
                               bg='#77E4C8',
+                              command=create_venv,
                               )
         btCreateVenv.place(x=80, y=187)
-
-        btActiveVenv = Button(frame,
-                              text='فعال کردن',
-                              font=('arial', 12, 'bold'),
-                              activebackground='#478CCF',
-                              activeforeground='white',
-                              fg='black',
-                              bg='#77E4C8',
-                              state='disabled'
-                              )
-        btActiveVenv.place(x=400, y=300)
-
-        btDeActiveVenv = Button(frame,
-                              text='غیر فعال کردن',
-                              font=('arial', 12, 'bold'),
-                              activebackground='#478CCF',
-                              activeforeground='white',
-                              fg='black',
-                              bg='#77E4C8',
-                              state='disabled'
-                              )
-        btDeActiveVenv.place(x=200, y=300)
-
-        lbPipName = Label(frame,
-                       text='pip install',
-                       font=('arial', 18, 'bold'),
-                       )
-        lbPipName.place(x=200, y= 400)
-
-        enGetLib = Entry(frame,
-                       width=10,
-                       font=('arial', 18, 'bold'),
-                       justify='center',
-                       bg='#77E4C8',
-                       state='disabled')
-        enGetLib.place(x=355, y=400)
-
-        btActiveVenv = Button(frame,
-                              text='نصب کن',
-                              font=('arial', 12, 'bold'),
-                              activebackground='#478CCF',
-                              activeforeground='white',
-                              fg='black',
-                              bg='#77E4C8',
-                              state='disabled'
-                              )
-        btActiveVenv.place(x=540, y=400)
         
 
     def command_git(self, frame):
+        def create_git():
+            pass
+
         self.clear(frame)
+
+        lbgit = Label(frame,
+                       text='گیت (git)',
+                       font=('arial', 18, 'bold'),
+                       )
+        lbgit.place(x=255, y= 10)
+
+
+        btGetPath = Button(frame,
+                           image=self.photoFolder,
+                           command=create_git)
+        btGetPath.place(x=575, y= 80)
+
+        enGetPath = Entry(frame,
+                       width=40,
+                       font=('arial', 18, 'bold'),
+                       bg='#77E4C8')
+        enGetPath.place(x=10, y=100)
 
     def command_gpt(self, frame):
         self.clear(frame)
