@@ -1,4 +1,11 @@
+import subprocess
 import os
 
-command = 'dir'
-os.system(f"start cmd /k {command}")
+path = r'D:\SAMAN\test22222'
+os.chdir(path)
+a =  subprocess.check_output('git log', shell=True, text=True)
+
+print(str(a))
+
+
+

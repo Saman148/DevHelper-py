@@ -139,17 +139,20 @@ class Fa(Tk):
             
             try:
                 nameVenv = enName.get()
-                os.system(f'py -m venv {nameVenv}')
-                messagebox.showinfo('ماشین مجازی', 'ماشین مجازی با موفقیت ساخته شد')
+                if nameVenv == '':
+                    messagebox.showerror('خطا', 'لطفا اسم ماشین مجازی را تایین کنید')
+                else:
+                    os.system(f'py -m venv {nameVenv}')
+                    messagebox.showinfo('ماشین مجازی', 'ماشین مجازی با موفقیت ساخته شد')
                 
-                btActiveVenv['state'] = 'active'
+                    btActiveVenv['state'] = 'active'
                 
             except Exception as e:
                 messagebox.showerror('خطا', e)
 
         
         def active_venv():
-            command = 'dir'
+            
             main_path = enGetPath.get()
             nameVenv = enName.get()
             path = os.path.join(main_path, nameVenv, 'Scripts')
@@ -214,10 +217,6 @@ class Fa(Tk):
                               )
         btActiveVenv.place(x=300, y=300)
 
-      
-
-        
-
     def command_git(self, frame):
         def get_path_git():
             try:
@@ -243,10 +242,154 @@ class Fa(Tk):
         btGetPath.place(x=575, y= 80)
 
         enGetPath = Entry(frame,
-                       width=40,
+                       width=30,
                        font=('arial', 18, 'bold'),
                        bg='#77E4C8')
-        enGetPath.place(x=10, y=100)
+        enGetPath.place(x=160, y=100)
+
+        btInitGit  = Button(frame,
+                              text= 'init',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10
+                              )
+        btInitGit.place(x=30, y=100)
+
+        btAddGit  = Button(frame,
+                              text= 'add .',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btAddGit.place(x=540, y=195)
+
+        btCommitGit  = Button(frame,
+                              text= 'commit -m',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btCommitGit.place(x=400, y=195)
+
+        btBranchGit  = Button(frame,
+                              text= 'Branch',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btBranchGit.place(x=260, y=195)
+
+        btSwitchGit  = Button(frame,
+                              text= 'switch',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btSwitchGit.place(x=120, y=195)
+
+        btMergeGit  = Button(frame,
+                              text= 'merge',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btMergeGit.place(x=540, y=255)
+
+        btMergeSquaGit  = Button(frame,
+                              text= 'merge Squash',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=13,
+                              state='disabled'
+                              )
+        btMergeSquaGit.place(x=370, y=255)
+
+        btCheckOutGit  = Button(frame,
+                              text= 'checkout commit',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=15,
+                              state='disabled'
+                              )
+        btCheckOutGit.place(x=170, y=255)
+
+        btLogGit  = Button(frame,
+                              text= 'log',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btLogGit.place(x=540, y=315)
+
+        btStatusGit  = Button(frame,
+                              text= 'status',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btStatusGit.place(x=400, y=315)
+
+        btPublishGit  = Button(frame,
+                              text= 'publish',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btPublishGit.place(x=260, y=315)
+
+        btCmdGit  = Button(frame,
+                              text= 'open cmd',
+                              font=('arial', 12, 'bold'),
+                              activebackground='#478CCF',
+                              activeforeground='white',
+                              fg='black',
+                              bg='#77E4C8',
+                              width=10,
+                              state='disabled'
+                              )
+        btCmdGit.place(x=100, y=315)
+
 
     def command_gpt(self, frame):
         self.clear(frame)
