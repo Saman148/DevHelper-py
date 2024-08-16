@@ -1,5 +1,6 @@
 tasks.txt
 *.url
+.idea\*
 languages\__pycache__\farsi.cpython-312.pyc
 # User-specific files
 *.rsuser
