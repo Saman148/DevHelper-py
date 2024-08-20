@@ -4,7 +4,6 @@ from tkinter import filedialog
 import os
 import subprocess
 import webbrowser
-import threading
 from openai import OpenAI
 
 
@@ -548,7 +547,7 @@ class Fa(Tk):
                       text='گیت (git)',
                       font=('arial', 18, 'bold'),
                       )
-        lbgit.place(x=255, y=10)
+        lbgit.place(x=320, y=10)
 
         btGetPath = Button(frame,
                            image=self.photoFolder,
@@ -809,7 +808,194 @@ class Fa(Tk):
  
 
     def command_note(self, frame):
+        path_projects = 'txt/projects.txt'
+
         self.clear(frame)
+        frame.config(bg='white', fg='black')
+
+        def add():
+            root = Toplevel()
+            root.title('add project')
+            root.config(bg='#36C2CE')
+            root.geometry('250x100')
+            root.resizable(False, False)
+
+            def final_add():
+                project_name = messsage.get()
+                with open(path_projects, 'a') as f:
+                    f.write(f'\n{project_name}')
+                messagebox.showinfo('موفقیت', 'با موفقیت اضافه شد')
+
+
+            messsage = Entry(root,
+                             width=18,
+                             font=('arial', 18, 'bold'),
+                             bg='#77E4C8')
+            messsage.place(x=5, y=5)
+
+            submit = Button(root,
+                            text='تایید',
+                            font=('arial', 10, 'bold'),
+                            activebackground='#478CCF',
+                            activeforeground='white',
+                            fg='black',
+                            bg='#77E4C8',
+                            width=18,
+                            command=final_add)
+            submit.place(x=40, y=60)
+
+            root.mainloop()
+
+
+
+        def remove():
+            root = Toplevel()
+            root.title('add project')
+            root.config(bg='#36C2CE')
+            root.geometry('250x100')
+            root.resizable(False, False)
+
+            def final_remove():
+                project_name = messsage.get()
+                try:
+            
+                    with open(path_projects, 'r') as f:
+                        all_projects = f.readlines()
+
+                    for project in all_projects:
+                        if project_name in project:
+                            index_list = all_projects.index(project)
+                            all_projects.pop(index_list)
+
+                    
+                    with open(path_projects, 'w') as f:
+                        for i in all_projects:
+                            f.write(i)
+
+                    messagebox.showinfo('موفقیت', 'با موفقیت حذف شد')
+
+                except Exception as e:
+                    messagebox.showerror('خطا', e)
+                        
+                     
+                
+
+            messsage = Entry(root,
+                             width=18,
+                             font=('arial', 18, 'bold'),
+                             bg='#77E4C8')
+            messsage.place(x=5, y=5)
+
+            submit = Button(root,
+                            text='تایید',
+                            font=('arial', 10, 'bold'),
+                            activebackground='#478CCF',
+                            activeforeground='white',
+                            fg='black',
+                            bg='#77E4C8',
+                            width=18,
+                            command=final_remove)
+            submit.place(x=40, y=60)
+
+            root.mainloop()
+
+        def show():
+                try:
+                    new = []
+                    with open(path_projects, 'r') as f:
+                        all_projects = f.readlines()
+
+                    for project in all_projects:
+                        new_name = project.replace('\n', '')
+                        new.append(new_name)
+
+                    for i in new:
+                        li_tasks.insert(END, i)
+
+                except Exception as e:
+                    messagebox.showerror('خطا', e)
+
+        
+        def update():
+            try:
+                    new = []
+                    with open(path_projects, 'r') as f:
+                        all_projects = f.readlines()
+
+                    for project in all_projects:
+                        new_name = project.replace('\n', '')
+                        new.append(new_name)
+
+                    for i in new:
+                        li_tasks.insert(END, i)
+
+            except Exception as e:
+                    messagebox.showerror('خطا', e)
+
+
+        lbnote = Label(frame,
+                      text='یادداشت',
+                      font=('arial', 18, 'bold'),
+                      )
+        lbnote.place(x=320, y=10)
+
+        li_tasks = Listbox(frame, 
+                           width=20, 
+                           height=15,
+                           bd=3,
+                           bg='#478CCF',
+                           fg='white',
+                           font=('arial', 12, 'bold')
+                           )
+        li_tasks.place(x=260, y=60)
+
+        bt_add = Button(frame,
+                        text='اضافه کردن',
+                        font=('arial', 12, 'bold'),
+                        activebackground='#478CCF',
+                        activeforeground='white',
+                        fg='black',
+                        bg='#77E4C8',
+                        width=10,
+                        command=add)
+        bt_add.place(x=80, y=60)
+
+        bt_remove = Button(frame,
+                           text='حذف کردن',
+                           font=('arial', 12, 'bold'),
+                           activebackground='#478CCF',
+                           activeforeground='white',
+                           fg='black',
+                           bg='#77E4C8',
+                           width=10,
+                            command=remove)
+        bt_remove.place(x=80, y=100)
+
+        bt_show = Button(frame,
+                         text='نمایش همه',
+                         font=('arial', 12, 'bold'),
+                         activebackground='#478CCF',
+                         activeforeground='white',
+                         fg='black',
+                         bg='#77E4C8',
+                         width=10,
+                            command=show)
+        bt_show.place(x=530, y=60)
+
+        bt_update = Button(frame,
+                           text='بروز کردن',
+                           font=('arial', 12, 'bold'),
+                           activebackground='#478CCF',
+                           activeforeground='white',
+                           fg='black',
+                           bg='#77E4C8',
+                           width=10,
+                            command=update)
+        bt_update.place(x=530, y=100)
+
+
+
+
 
     def command_voice(self, frame):
         def start_listen():
