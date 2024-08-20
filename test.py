@@ -1,15 +1,10 @@
-import openai
+from openai import OpenAI
+client = OpenAI(api_key='asst_njZ9AwFYwOp49gCuheoUFgY6')
 
-# Set your API key
-openai.api_key = 'your-api-key-here'
-
-# Make a request to the API
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",  # or a different model you want to use
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
     messages=[
-        {"role": "user", "content": "Hello, how are you?"}
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "What is a LLM?"}
     ]
 )
-
-# Print the response
-print(response.choices[0].message['content'])

@@ -5,6 +5,7 @@ import os
 import subprocess
 import webbrowser
 import threading
+from openai import OpenAI
 
 
 class Fa(Tk):
@@ -140,6 +141,7 @@ class Fa(Tk):
 
     def command_venv(self, frame):
 
+        frame.config(bg='white', fg='black')
         def get_path():
             try:
                 file = filedialog.askdirectory()
@@ -231,6 +233,7 @@ class Fa(Tk):
         btActiveVenv.place(x=300, y=300)
 
     def command_git(self, frame):
+        frame.config(bg='white', fg='black')
         def get_path_git():
 
             try:
@@ -425,6 +428,7 @@ class Fa(Tk):
 
             def merge_squach_final():
                 try:
+
                     branchName = messsage.get()
                     a = subprocess.check_output(
                         f'git merge --squach "{branchName}"', shell=True, text=True)
@@ -714,18 +718,138 @@ class Fa(Tk):
 
     def command_gpt(self, frame):
         self.clear(frame)
+        frame.config(bg='white', fg='black')
+
+        root = Toplevel()
+        root.title('get api')
+        root.config(bg='#36C2CE')
+        root.geometry('250x100')
+        root.resizable(False, False)
+
+        def publish_final():
+            def gpt_submit():
+                try:
+                    text = tx.get("1.0", 'end-1c')
+                    tx.delete("1.0", 'end-1c')
+
+                    client = OpenAI(
+                        api_key=api,  # your api key
+                    )
+
+                    stream = client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[{"role": "user", "content": text}],
+                        stream=True,
+                    )
+                    for chunk in stream:
+                        if chunk.choices[0].delta.content is not None:
+                            a = chunk.choices[0].delta.content, end = ""
+
+                    roo2 = Toplevel()
+                    roo2.title('chat gpt')
+                    txxx = Text(roo2)
+                    txxx.pack()
+                    txxx.insert("1.0", a)
+
+                    roo2.mainloop()
+
+                except Exception as e:
+                    print(e)
+                    messagebox.showerror('خطا', e)
+
+            try:
+                
+                api = messsage.get()
+
+                tx = Text(frame,
+                          width=73,
+                          height=20,
+                          bg='#478CCF',
+                          fg='white',
+                          font=('arial', 12, 'bold'),
+                          selectbackground='#77E4C8',
+                          insertbackground='red',
+                          bd=5,
+                          )
+                tx.pack(padx=10, pady=10)
+
+                bt = Button(frame,
+                            text='تایید',
+                            font=('arial', 12, 'bold'),
+                            activebackground='#478CCF',
+                            activeforeground='white',
+                            fg='black',
+                            bg='#77E4C8',
+                            width=10,
+                            command=gpt_submit)
+                bt.pack(padx=10, pady=10)
+
+            except Exception as e:
+                messagebox.showerror('خطا', e)
+
+
+        messsage = Entry(root,
+                            width=18,
+                            font=('arial', 18, 'bold'),
+                            bg='#77E4C8')
+        messsage.place(x=5, y=5)
+
+        submit = Button(root,
+                        text='تایید',
+                        font=('arial', 10, 'bold'),
+                        activebackground='#478CCF',
+                        activeforeground='white',
+                        fg='black',
+                        bg='#77E4C8',
+                        width=18,
+                        command=publish_final)
+        submit.place(x=40, y=60)
+
+        root.mainloop()
+ 
 
     def command_note(self, frame):
         self.clear(frame)
 
     def command_voice(self, frame):
+        def start_listen():
+            pass
+
         self.clear(frame)
+
+        frame.config(bg='black', fg='white')
+        lb_voice = Label(frame,
+                         text='voice assistant',
+                         bg = 'black',
+                         font=('arial', 18, 'bold'),
+                         fg = 'white')
+        lb_voice.place(x=270, y=10)
+
+        lb_text = Label(frame,
+                        text='',
+                         bg='black',
+                         font=('arial', 18, 'bold'),
+                         fg='white')
+        lb_text.place(x=270, y=200)
+
+        bt_start = Button(frame,
+                        text='start',
+                        bg='darkgray',
+                        activebackground='white',
+                        activeforeground='black',
+                        font=('arial', 14, 'bold'),
+                        fg='white',
+                        width=15,
+                        command=start_listen)
+        bt_start.place(x=470, y=400)
+                         
+
 
     def command_myGit(self, frame):
-        self.clear(frame)
+        webbrowser.open('https://github.com/Saman148')
 
     def b_github(self):
-        webbrowser.open('https://github.com/Saman148/Strange-App')
+        webbrowser.open('https://github.com/Saman148')
 
 
 if __name__ == "__main__":

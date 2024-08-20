@@ -1,11 +1,17 @@
-import subprocess
-import os
+from tkinter import *
 
-path = r'D:\SAMAN\test22222'
-os.chdir(path)
-a =  subprocess.check_output('git log', shell=True, text=True)
 
-print(str(a))
+root = Tk()
+root.title('get TEXT')
 
 
 
+
+a = Text(root)
+
+a.pack()
+
+a.insert("1.0",'asdasdasdasd\n asdasd')
+
+
+root.mainloop()
