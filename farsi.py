@@ -6,6 +6,10 @@ import subprocess
 import webbrowser
 from openai import OpenAI
 
+import speech_recognition as sr
+import pyautogui
+import screen_brightness_control as sbc
+
 
 class Fa(Tk):
     def __init__(self, geometry, title, bg, icon):
@@ -999,13 +1003,88 @@ class Fa(Tk):
 
     def command_voice(self, frame):
         def start_listen():
-            pass
+            # ? wake up call
+            wakeUpCall = "سیستم"
+
+            # ? commands
+            exit_commands = ['خروج', 'خاموش', 'خارج', 'تمام', 'تموم', 'پایان']
+            prev_commands = ['قبلی', 'قبلیه']
+            next_commands = ['بعدی', 'بعدیه']
+            play_commands = ['پلی', 'پخش']
+            stop_commands = ['استاپ', 'قطع', 'ببند', 'متوقف']
+            sound_commands = ['صدا', 'آهنگ', 'اهنگ', 'موسیقی']
+            sound_mute_commands = ['ببند', 'میوت']
+            sound_vol_down = ['کم', 'پایین', ]
+            sound_vol_up = ['زیاد', 'بالا', ]
+            bright_commands = ['نور']
+            bright_up_commands = ['زیاد', 'بالا']
+            bright_down_commands = ['کم', 'پایین']
+
+            r = sr.Recognizer()
+            mic = sr.Microphone(device_index=0)
+            while True:
+                try:
+                    with mic as source:
+                        audio = r.listen(source)
+                        command = r.recognize_google(
+                            audio, language='fa-IR').lower()
+                        
+                        if wakeUpCall in command:
+                            if any(item in command for item in exit_commands):
+                                lb_text['text']='در حال خارج شدن'
+                                break
+
+                            elif any(item in command for item in prev_commands):
+                                pyautogui.press('prevtrack')
+                                lb_text['text']="انجام دادم"
+
+                            elif any(item in command for item in next_commands):
+                                pyautogui.press('nexttrack')
+                                lb_text['text']="انجام دادم"
+
+                            elif any(item in command for item in play_commands):
+                                pyautogui.press('playpause')
+                                lb_text['text']="انجام دادم"
+
+                            elif any(item in command for item in stop_commands):
+                                pyautogui.press('playpause')
+                                lb_text['text']="انجام دادم"
+
+                            elif any(item in command for item in sound_commands):
+
+                                if any(item in command for item in sound_mute_commands):
+                                    pyautogui.press('volumemute')
+                                    lb_text['text']="انجام دادم"
+
+                                elif any(item in command for item in sound_vol_down):
+                                    pyautogui.press('volumedown', presses=10)
+
+                                elif any(item in command for item in sound_vol_up):
+                                    pyautogui.press('volumeup', pressess=10)
+
+                            elif any(item in command for item in bright_commands):
+
+                                if any(item in command for item in bright_up_commands):
+                                    sbc.set_brightness(100)
+                                    lb_text['text']="انجام دادم"
+
+                                elif any(item in command for item in bright_down_commands):
+                                    sbc.set_brightness(50)
+                                    lb_text['text']="انجام دادم"
+
+                            else:
+                                lb_text['text']='متوجه نشدم 😁'
+                except Exception as e:
+                    print(e)
+                    r = sr.Recognizer()
+                    continue
+            
 
         self.clear(frame)
 
         frame.config(bg='black', fg='white')
         lb_voice = Label(frame,
-                         text='voice assistant',
+                         text='دستیار صوتی',
                          bg = 'black',
                          font=('arial', 18, 'bold'),
                          fg = 'white')
@@ -1019,7 +1098,7 @@ class Fa(Tk):
         lb_text.place(x=270, y=200)
 
         bt_start = Button(frame,
-                        text='start',
+                        text='شروع',
                         bg='darkgray',
                         activebackground='white',
                         activeforeground='black',

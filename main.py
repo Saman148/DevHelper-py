@@ -107,7 +107,12 @@ if __name__ == "__main__":
 
     if show == 'True':
         if lang == 'fa':
-            pass
+            obj = Fa('900x500',
+                     'DevHelper Farsi py',
+                     '#36C2CE',
+                     r'images-main/assistant-icon.ico',)
+            obj.create_lables_buttons_frame()
+            obj.mainloop()
 
         elif lang == 'en':
             pass   #open english file
