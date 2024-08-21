@@ -39,25 +39,28 @@
 
 <h1 id='preview'>preview</h1>
 
-Language selection section </br>
+- Language selection section </br>
+![Screenshot (17)](https://github.com/user-attachments/assets/74ddf928-11cc-4255-bb4a-922b0579c38b)
 
-![Language selection section](https://github.com/user-attachments/assets/cf996c5b-bc23-478d-8a3e-a1fa65f1ede7)
 
-Main page section </br>
 
-![Main page section](https://github.com/user-attachments/assets/4202b3ca-73a2-4b62-83c5-f544c0e8d516)
+- Main page section </br>
 
-Virtual envierment section </br>
+![Screenshot (18)](https://github.com/user-attachments/assets/fb7e941a-733a-4ad4-9a55-5897cefa5e33)
 
-![Virtual envierment section](https://github.com/user-attachments/assets/74b36be9-5b57-4944-b098-5952fb687ccd)
+- Virtual envierment section </br>
 
-Git section </br>
+![Screenshot (19)](https://github.com/user-attachments/assets/f099d618-0622-48a8-8219-f57951872c56)
 
-![Git section](https://github.com/user-attachments/assets/0a231e78-5df3-4525-b1c8-52cd2c89c93c)
 
-Note section </br>
+- Git section </br>
 
-![Note section](https://github.com/user-attachments/assets/1b52358d-8435-484c-9712-99f2668e4f4d)
+![Screenshot (20)](https://github.com/user-attachments/assets/6beef16d-6686-45dc-95c7-a48a68df418f)
+
+
+- Note section </br>
+
+![Screenshot (21)](https://github.com/user-attachments/assets/abc9f62a-0188-4aff-ac41-ffb3e42af312)
 
 ---
 
